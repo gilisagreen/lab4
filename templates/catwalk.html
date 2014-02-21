@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>Cat Walk</title>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+ <script src="//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
+ </head>
+ <body>
+  
+  <img style="position:absolute;" src="{{ url_for('static', filename='cat.gif') }}">
+  
+  <script>
+
+var img = document.getElementsByTagName('img')[0];
+
+img.addEventListener("mouseover", function(){
+    var meow = new Audio('http://www.soundsnap.com/audio/play/126375');
+                meow.play();
+        });
+
+if(typeof(localStorage.pos)=="undefined"){
+  img.style.left = '0px';
+}
+  else{
+img.style.left = localStorage.pos;}
+
+var walkForwards = true;
+
+function catWalk() {
+  var currentLeft = parseInt(img.style.left);
+
+  if (walkForwards && (currentLeft > (window.innerWidth-img.width))) {
+    walkForwards = false;
+  }
+  if (!walkForwards && (currentLeft <= 0)) {
+    walkForwards = true;
+  }
+  
+  if (walkForwards) {
+    img.style.left = (currentLeft + 10) + 'px';
+    localStorage.pos = img.style.left;
+  } else {
+    img.style.left = (currentLeft - 10) + 'px';
+    localStorage.pos = img.style.left;
+  }
+}
+
+window.setInterval(catWalk, 50);
+ //alert(localStorage.pos);
+  </script>
+
+ </body>
+</html>

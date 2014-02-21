@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title></title>
+ </head>
+ <body>
+ 
+ <h1>Mad Libs</h1>
+ 
+ <ul>
+  <li>Noun: <input type="text" id="noun">
+  <li>Adjective: <input type="text" id="adjective">
+  <li>Someone's Name: <input type="text" id="name">
+ </ul>
+ 
+ <button id="lib-button">Lib it!</button>
+  
+ <div id="story"></div>
+  
+  <script>
+if (typeof(localStorage.noun)!= "undefined"){
+    document.getElementById("noun").value = localStorage.noun;
+    document.getElementById("adjective").value = localStorage.adjective;
+    document.getElementById("name").value = localStorage.Name;
+}
+
+function libIt() {
+  var storyDiv = document.getElementById("story");
+  var name = document.getElementById("name").value;
+  var adjective = document.getElementById("adjective").value;
+  var noun = document.getElementById("noun").value;
+  storyDiv.innerHTML = name + " married a " + adjective + " " + noun + "... So weird!";
+if (typeof(localStorage.phrases) != "undefined"){
+    localStorage.phrases += storyDiv.innerHTML + "<br>";
+    }
+else {
+    localStorage.phrases = storyDiv.innerHTML + "<br>";
+  }
+  storyDiv.innerHTML = localStorage.phrases;
+}
+
+var libButton = document.getElementById('lib-button');
+libButton.addEventListener('click', libIt);
+
+
+	</script>
+
+ </body>
+</html>
